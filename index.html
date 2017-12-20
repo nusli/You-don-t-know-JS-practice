@@ -2,10 +2,10 @@
 <html>
 <head>
     <link rel=stylesheet href="style.css">
-    <title>'This' functions</title>
+    <title>Title</title>
 </head>
 <body>
-<h1 class="code">This</h1>
+<h1 class="code">Topic</h1>
 <div id="page">
 <div class="left">
     <h2>Variables:</h2>
@@ -15,28 +15,13 @@
         },
         obj2 = {
             name: "obj2"
-        },
-        name = "Global Scope";
+        };
     </pre></p>
     <h2>Code:</h2>
     <p><pre class="code">
         function printName () {
-            console.log(this.name);
             return this.name;
-        }
-        
-        function foo ( a ) {
-            this.name = a;
-            this.print = printName;
-            this.wrap = function oneWrap () {
-                this.print();
-            };
-            this.printWrap = function oneWrap () {
-                printName();
-            };
-        }
-        
-        var obj3 = new foo("obj3");
+        };
     </pre></p>
     </div>
     <table id="results" class="right">
