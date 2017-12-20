@@ -2,12 +2,52 @@
 <html>
 <head>
     <link rel=stylesheet href="style.css">
-    <title>Page Title</title>
+    <title>'This' functions</title>
 </head>
 <body>
+<h1 class="code">This</h1>
+<div id="page">
+<div class="left">
+    <h2>Variables:</h2>
+    <p><pre id="variables" class="code">
+        var obj1 = {
+            name: "obj1"
+        },
+        obj2 = {
+            name: "obj2"
+        },
+        name = "Global Scope";
+    </pre></p>
+    <h2>Code:</h2>
+    <p><pre class="code">
+        function printName () {
+            console.log(this.name);
+            return this.name;
+        }
+        
+        function foo ( a ) {
+            this.name = a;
+            this.print = printName;
+            this.wrap = function oneWrap () {
+                this.print();
+            };
+            this.printWrap = function oneWrap () {
+                printName();
+            };
+        }
+        
+        var obj3 = new foo("obj3");
+    </pre></p>
+    </div>
+    <table id="results" class="right">
+        <tr>
+            <th>Function</th>
+            <th>return value</th>
+        </tr>
+    </table>
+    </div>
+</div>
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
 
 <script src="index.js"></script>
 </body>
