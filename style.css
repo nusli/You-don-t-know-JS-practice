@@ -7,9 +7,21 @@ h1 {
     border-radius: 20px;
     margin-left: 50px;
 }
+button {
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #eeeeee 0%, #999999 100%);
+    box-shadow: 2px 2px 4px #888888;
+}
+button:hover {
+    cursor: pointer;
+}
+button:active {
+    box-shadow: none;
+}
 .code {
     font-family: "OCR A Std", monospace;
     background-color: #ccc;
+    padding-right: 25px;
 }
 #results .precode {
     text-decoration: underline;
