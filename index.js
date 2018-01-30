@@ -7,22 +7,32 @@ fetch(url)
 .then( function (responsejson) { console.log(responsejson.id); })
 .catch( function (e) {console.log(e) });
 
-function print(text) {
-    let $button = $(this),
-    $paragraph = $button.next();
-    $paragraph.text(text);
+function printAfterButton(text, button) {
+    console.log(this);
+    let paragraph = button.nextElementSibling;
+    paragraph.innerHTML += text;
+    console.log(button, paragraph);
 };
-function printError (err) {
-    let self = $(this);
-    return print ("Error: /n" + err, self);
+
+function printSuccess ( successMessage) {
+    let text = "Success! \n" + successMessage;
+    printAfterButton(text);
 }
-function getData () {
-    return new Promise ( function (resolve,reject){
-        $.get( {
-            url: url,
-            error: printError(),
-            success: printSuccess(data)
-        } );
-    })
-}
+
+//loop through buttons and apply eventlistener
+
+    //buttons[0].addEventListener("click", printAfterButton("Hello World!", this) );
+
+    function testprint ( text , me = this) {
+        console.log(this);
+    }
+    
+    var testobject = {
+        print: function () {testprint("Hello World")},
+        hello: function () {console.log(this)}
+    }
+    testprint.apply(testobject);
+    testobject.hello();
+
+
 
