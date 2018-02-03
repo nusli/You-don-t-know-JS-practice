@@ -8,8 +8,8 @@
 <h1 class="code">Generators + Promises</h1>
 <div id="page">
 <div class="left">
+    
     <h2>Code:</h2>
-
     <p><pre class="code">
 fetch(url)
 .then( function (response) {
@@ -27,6 +27,7 @@ fetch(url)
     <p class="result code"></p>
 
     
+    <h2>Code:</h2>
     <p><pre class="code">
 function* prGenerator (button) {
     let response = yield fetch(url);
@@ -57,8 +58,8 @@ p1.then(
 
     </div>
     <div class="right">
+        
         <h2>Code:</h2>
-
         <p><pre class="code">
 fetch(failUrl)
 .then( function (response) {
