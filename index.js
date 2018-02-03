@@ -59,8 +59,9 @@ for (let i = 0; i < buttons.length; i++) {
 // Generator + Promises
 
 function* prGenerator (button) {
-    let response = yield fetch(url);
+    let response = yield fetch(failUrl);
     let responsejson = yield response.json();
+    console.log("Generator completed");
     printSuccess(responsejson.title, button);
 }
 
@@ -78,7 +79,7 @@ function generatorOne (button) {
                     it.next(responsejson);
                 } )
         }
-    ).catch (function handleError (err) {
+    ).catch (function handleError (e) {
         console.log(e);
         printError(e, button);
     })

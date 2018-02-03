@@ -33,8 +33,10 @@ function* prGenerator (button) {
     let responsejson = yield response.json();
     printSuccess(responsejson.title, button);
 }
+
 let it = prGenerator(button);
 let p1 = it.next().value; //Generator returns promise
+
 p1.then(
     function firstPromise (response) {
         // go on with generator - returns new promise
@@ -44,7 +46,8 @@ p1.then(
                 it.next(responsejson);
             } )
     }
-).catch (function handleError (err) {
+)
+.catch (function handleError (err) {
     console.log(e);
     printError(e, button);
 })
