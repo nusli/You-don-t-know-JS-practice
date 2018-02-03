@@ -47,8 +47,8 @@ function promiseFailCode (button) {
 
 let codeArr = [
     promiseCode,
-    promiseFailCode,
-    generatorOne
+    generatorOne,
+    promiseFailCode
 ];
 
 //loop through buttons and apply eventlistener
