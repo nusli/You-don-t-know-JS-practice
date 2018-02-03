@@ -9,6 +9,7 @@
 <div id="page">
 <div class="left">
     <h2>Code:</h2>
+
     <p><pre class="code">
 fetch(url)
 .then( function (response) {
@@ -24,9 +25,37 @@ fetch(url)
         </pre></p>
     <button class="execButton" >Execute</button>
     <p class="result code"></p>
+
+    
+    <p><pre class="code">
+function* prGenerator (button) {
+    let response = yield fetch(url);
+    let responsejson = yield response.json();
+    printSuccess(responsejson.title, button);
+}
+let it = prGenerator(button);
+let p1 = it.next().value; //Generator returns promise
+p1.then(
+    function firstPromise (response) {
+        // go on with generator - returns new promise
+        let p2 = it.next(response).value;
+        p2.then ( 
+            function secondPromise (responsejson) {
+                it.next(responsejson);
+            } )
+    }
+).catch (function handleError (err) {
+    console.log(e);
+    printError(e, button);
+})
+                </pre></p>
+            <button class="execButton" >Execute</button>
+            <p class="result code"></p>
+
     </div>
     <div class="right">
         <h2>Code:</h2>
+
         <p><pre class="code">
 fetch(failUrl)
 .then( function (response) {
@@ -42,6 +71,7 @@ fetch(failUrl)
             </pre></p>
         <button class="execButton" >Execute</button>
         <p class="result code"></p>
+     
         
     </div>
     </div>
