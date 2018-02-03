@@ -10,12 +10,17 @@
 <div class="left">
     <h2>Code:</h2>
     <p><pre class="code">
-    var obj1 = {
-        name: "obj1"
-    },
-    obj2 = {
-        name: "obj2"
-    };
+fetch(url)
+.then( function (response) {
+    return response.json();
+})
+.then( function (responsejson) {
+    printSuccess(responsejson.title, button);
+})
+.catch( function (e) {
+    console.log(e);
+    printError(e, button)
+ });
         </pre></p>
     <button class="execButton" >Execute</button>
     <p class="result code"></p>
@@ -23,12 +28,17 @@
     <div class="right">
         <h2>Code:</h2>
         <p><pre class="code">
-    var obj1 = {
-        name: "obj1"
-    },
-    obj2 = {
-        name: "obj2"
-    };
+fetch(failUrl)
+.then( function (response) {
+    return response.json();
+})
+.then( function (responsejson) {
+    printSuccess(responsejson.title, button);
+})
+.catch( function (e) {
+    console.log(e);
+    printError(e, button);
+ });
             </pre></p>
         <button class="execButton" >Execute</button>
         <p class="result code"></p>

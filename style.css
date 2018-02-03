@@ -33,7 +33,7 @@ button:active {
 }
 #page {
     display: grid;
-    grid-template-columns: 35vw 35vw;
+    grid-template-columns: 45vw 45vw;
     grid-template-areas: 
     "left right";
     grid-column-gap: 2vw;

@@ -8,31 +8,81 @@ fetch(url)
 .catch( function (e) {console.log(e) });
 
 function printAfterButton(text, button) {
-    console.log(this);
     let paragraph = button.nextElementSibling;
     paragraph.innerHTML += text;
     console.log(button, paragraph);
 };
 
-function printSuccess ( successMessage) {
-    let text = "Success! \n" + successMessage;
-    printAfterButton(text);
+function printSuccess ( successMessage, button) {
+    let text = "Success! <br/>" + successMessage;
+    printAfterButton(text, button);
 }
 
+function printError ( errorMessage, button) {
+    let text = "Error: <br/>" + errorMessage;
+    printAfterButton(text, button);
+}
+
+// Promise
+
+function promiseCode (button) {
+    fetch(url)
+    .then( function (response) { return response.json() })
+    .then( function (responsejson) { printSuccess(responsejson.title, button)})
+    .catch( function (e) {
+        console.log(e);
+        printError(e, button)
+     });
+}
+
+function promiseFailCode (button) {
+    fetch(failUrl)
+    .then( function (response) { return response.json() })
+    .then( function (responsejson) { printSuccess(responsejson.title, button)})
+    .catch( function (e) {
+        console.log(e);
+        printError(e, button);
+     });
+}
+
+let codeArr = [
+    promiseCode,
+    promiseFailCode,
+    generatorOne
+];
+
 //loop through buttons and apply eventlistener
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function () { codeArr[i](this); })
+}
 
-    //buttons[0].addEventListener("click", printAfterButton("Hello World!", this) );
+// Generator + Promises
 
-    function testprint ( text , me = this) {
-        console.log(this);
-    }
-    
-    var testobject = {
-        print: function () {testprint("Hello World")},
-        hello: function () {console.log(this)}
-    }
-    testprint.apply(testobject);
-    testobject.hello();
+function* prGenerator (button) {
+    let response = yield fetch(url);
+    let responsejson = yield response.json();
+    printSuccess(responsejson.title, button);
+}
+
+function generatorOne (button) {
+    let it = prGenerator(button);
+    let p1 = it.next().value; //Generator returns promise
+
+    p1.then(
+        function firstPromise (response) {
+            // go on with generator - returns new promise
+            let p2 = it.next(response).value;
+
+            p2.then ( 
+                function secondPromise (responsejson) {
+                    it.next(responsejson);
+                } )
+        }
+    ).catch (function handleError (err) {
+        console.log(e);
+        printError(e, button);
+    })
+}
 
 
 
